@@ -24,7 +24,7 @@
 `Install mermaid plugin to IDEA to be able to see the diagram`
 ```mermaid
 flowchart TB
-   CloudEventPlayer -- HTTP --> Broker -- trigger --> CloudEventPlayer
-   Broker -- trigger`type=payment-instruction-status-changed` --> NotifyPabloPaymentInstructionStatusChanged
-   Broker -- trigger`type=refund-transaction-status-changed` --> NotifyPabloRefundTransactionStatusChanged
+   CloudEventPlayer -- HTTP --> Broker -- HTTP\n trigger --> CloudEventPlayer
+   Broker -- HTTP\n trigger`type=payment-instruction-status-changed` --> NotifyPabloPaymentInstructionStatusChanged
+   Broker -- HTTP\n trigger`type=refund-transaction-status-changed` --> NotifyPabloRefundTransactionStatusChanged
 ```
