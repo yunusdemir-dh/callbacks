@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <JsonLayout locationInfo="false"
+                        complete="false"
+                        compact="true"
+                        eventEol="true"
+                        properties="true"
+                        stacktraceAsString="true"
+                        includeTimeMillis="true">
+                <KeyValuePair key="timestamp" value="$${date:yyyy-MM-dd'T'HH:mm:ss.SSS'Z'}" />
+            </JsonLayout>
+        </Console>
+    </Appenders>
+
+    <!-- The configuration is used for environments where json logs representation is needed -->
+    <Loggers>
+        <Logger name="com.deliveryhero" level="${env:DD_LOG_LEVEL:-INFO}" />
+        <Logger name="com.deliveryhero.alfred.workers" level="${env:DD_LOG_LEVEL:-INFO}" />
+
+        <AsyncRoot level="${env:DD_LOG_LEVEL:-INFO}">
+            <AppenderRef ref="ConsoleAppender"/>
+        </AsyncRoot>
+    </Loggers>
+</Configuration>

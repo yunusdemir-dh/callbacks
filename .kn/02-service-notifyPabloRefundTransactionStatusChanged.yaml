@@ -1,0 +1,33 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: notify-pablo-refund-transaction-status-changed
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
+    spec:
+      containers:
+        - image: yunusde/callbacks:regular
+          ports:
+            - containerPort: 8080
+          env:
+
+---
+
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: trigger-notify-pablo-refund-transaction-status-changed
+spec:
+  broker: callback-broker
+  filter:
+    attributes:
+      type: refund-transaction-status-changed
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: notify-pablo-refund-transaction-status-changed
+    uri: /notify-pablo-refund-transaction-status-changed
